@@ -978,7 +978,7 @@ var globalinput={
 			                                  initData:{
 
 			                                      form:{
-			                                        id:  "Ni76QCOTHYrqqRmOy",
+			                                        id:  "Ni76QCOTHYrqqRmOy@"+window.location.hostname,
 			                                        title: "Wordpress login",
 			                                        fields:[{
 			                                                  label:"Username",
