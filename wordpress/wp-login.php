@@ -897,6 +897,13 @@ default:
 	}
 ?>
 
+<style type="text/css">
+   #loginform {
+		 width:100%;
+	 }
+
+</style>
+
 <form name="loginform" id="loginform" action="<?php echo esc_url( site_url( 'wp-login.php', 'login_post' ) ); ?>" method="post">
 	<p>
 		<label for="user_login"><?php _e( 'Username or Email Address' ); ?><br />
@@ -905,6 +912,10 @@ default:
 	<p>
 		<label for="user_pass"><?php _e( 'Password' ); ?><br />
 		<input type="password" name="pwd" id="user_pass"<?php echo $aria_describedby_error; ?> class="input" value="" size="20" /></label>
+	</p>
+	<p id="qrcode">
+		here display the qrcode
+
 	</p>
 	<?php
 	/**
@@ -943,8 +954,81 @@ default:
 <?php endif; ?>
 </p>
 <?php } ?>
+<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/04f46c6a/qrcode.min.js">
+</script>
+
+<script src="https://unpkg.com/global-input-message@1.3.33/lib/global-input-message.min.js">
+</script>
 
 <script type="text/javascript">
+
+var globalinput={
+				    api:require("global-input-message")
+    		};
+
+
+				globalinput.config={
+			                                  onSenderConnected:function(){
+
+
+			                                  },
+			                                  onSenderDisconnected:function(){
+
+			                                  },
+			                                  initData:{
+
+			                                      form:{
+			                                        id:  "Ni76QCOTHYrqqRmOy",
+			                                        title: "Wordpress login",
+			                                        fields:[{
+			                                                  label:"Username",
+			                                                  id:"username",
+			                                                  operations:{
+			                                                      onInput:function(username){
+			                                                           document.getElementById("user_login").value=username;
+			                                                      }
+			                                                  }
+
+			                                                },{
+			                                                   label:"Password",
+			                                                   id:"password",
+			                                                   type:"secret",
+			                                                   operations:{
+			                                                     onInput:function(password){
+			                                                      document.getElementById("user_pass").value=password;
+			                                                     }
+			                                                   }
+
+			                                                },{
+			                                                   label:"Login",
+			                                                   type:"button",
+			                                                   operations:{
+			                                                      onInput:function(){
+																																    document.getElementById("wp-submit").click();
+			                                                      }
+			                                                   }
+
+			                                                }]
+			                                            }
+			                                      }
+
+			                              };
+			     globalinput.connector=globalinput.api.createMessageConnector();
+			     globalinput.connector.connect(globalinput.config);
+			     var codedata=globalinput.connector.buildInputCodeData();
+
+
+
+			     var qrcode = new QRCode(document.getElementById("qrcode"), {
+			       text: codedata,
+			       width: 300,
+			       height: 300,
+			       colorDark : "#000000",
+			       colorLight : "#ffffff",
+			       correctLevel : QRCode.CorrectLevel.H
+			     });
+
+
 function wp_attempt_focus(){
 setTimeout( function(){ try{
 <?php if ( $user_login ) { ?>
