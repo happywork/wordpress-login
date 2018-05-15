@@ -22,15 +22,12 @@ Insert the following somewhere in the file:
 ```
 <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/04f46c6a/qrcode.min.js">
 </script>
-
-
 <script src="https://unpkg.com/global-input-message@1.3.42/lib/global-input-message.min.js">
 </script>
 
 <script type="text/javascript">
 
 (function() {
-
 	var formElement=document.getElementById("loginform");
 	qrCodeElement=document.createElement('p');
 
@@ -38,67 +35,55 @@ Insert the following somewhere in the file:
 	qrCodeElement.style.backgroundColor="#FFFFFF";
 
 	formElement.parentNode.insertBefore(qrCodeElement,formElement);
-
-
-
-
-
 	var globalinput={
 						 api:require("global-input-message")
 				 };
+	globalinput.config={
+				onSenderConnected:function(){
+					  qrCodeElement.style.display="none";
+        },
+        onSenderDisconnected:function(){
+						qrCodeElement.style.display="block";
+        },
+        initData:{
+          form:{
+                id:  "###username###@"+window.location.hostname+".wordpress",
+                title: "Wordpress login",
+                fields:[{
+                            label:"Username",
+                            id:"username",
+                            operations:{
+                                  onInput:function(username){
+                                  document.getElementById("user_login").value=username;
+                                }
+                            }
+                        },{
+                              label:"Password",
+                              id:"password",
+                              type:"secret",
+															operations:{
+																onInput:function(password){
+																 document.getElementById("user_pass").value=password;
+																}
+															}
 
+													 },{
+															label:"Login",
+															type:"button",
+															operations:{
+																 onInput:function(){
+																				 document.getElementById("wp-submit").click();
+																 }
+															}
 
-				 globalinput.config={
-																				 onSenderConnected:function(){
-																					 	qrCodeElement.style.display="none";
-																				 },
-																				 onSenderDisconnected:function(){
-																					 	qrCodeElement.style.display="block";
-																				 },
-																				 initData:{
+													 }]
+											 }
+								 }
 
-																						 form:{
-																							 id:  "###username###@"+window.location.hostname+".wordpress",
-																							 title: "Wordpress login",
-																							 fields:[{
-																												 label:"Username",
-																												 id:"username",
-																												 operations:{
-																														 onInput:function(username){
-																																	document.getElementById("user_login").value=username;
-																														 }
-																												 }
-
-																											 },{
-																													label:"Password",
-																													id:"password",
-																													type:"secret",
-																													operations:{
-																														onInput:function(password){
-																														 document.getElementById("user_pass").value=password;
-																														}
-																													}
-
-																											 },{
-																													label:"Login",
-																													type:"button",
-																													operations:{
-																														 onInput:function(){
-																																		 document.getElementById("wp-submit").click();
-																														 }
-																													}
-
-																											 }]
-																									 }
-																						 }
-
-																		 };
+				 };
 						globalinput.connector=globalinput.api.createMessageConnector();
 						globalinput.connector.connect(globalinput.config);
 						var codedata=globalinput.connector.buildInputCodeData();
-
-
-
 						var qrcode = new QRCode(qrCodeElement, {
 							text: codedata,
 							width: 300,
