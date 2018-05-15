@@ -10,14 +10,9 @@ First backup your existing ```wordpress/wp-login.php``` file in your website fol
 ### Manual changes to the file
 
 First backup your existing ```wordpress/wp-login.php``` file in your website folder and
-open the file ```wordpress/wp-login.php``` in your website with an editor and find the following location:
+open the file ```wordpress/wp-login.php``` in your website with an editor.
 
-
-
-(1)
-
-Insert the following somewhere in the file:
-
+And insert the following content somewhere in the file or you can just copy the corresponding file in this repository:
 
 ```
 <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/04f46c6a/qrcode.min.js">
