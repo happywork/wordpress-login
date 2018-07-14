@@ -47,6 +47,8 @@
 						qrCodeSection.style.display="block";
         },
         initData:{
+          action:"input",
+          dataType:"form",
           form:{
                 id: window.location.hostname+".wordpress",
                 title: "CONTACT US",

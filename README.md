@@ -1,14 +1,14 @@
 # global-input/word-login
 
 
-This repository is to make a wordpress website to support the sign in with the Global Input software. After the simple changes, you should be able to sign in with the Global Input mobile app (available in [iOS](https://itunes.apple.com/us/app/global-input-app/id1269541616?mt=8&ign-mpt=uo%3D4) and [Android](https://itunes.apple.com/us/app/global-input-app/id1269541616?mt=8&ign-mpt=uo%3D4)) just by pointing the phone camera to the QR code displayed. This means you can sign in quickly and securely.
+This repository is to make your wordpress website support the [Global Input App](https://globalinput.co.uk/), so you can use your mobile as a sign-in device while you are signing in on your website via a browser on your computer.
 
 ### Quick solution
 
 First backup your existing ```wordpress/wp-login.php``` file in your website folder and replace its content with the content of the [```wordpress/wp-login.php``` in this repo](https://github.com/global-input/wordpress-login/blob/master/wordpress/wp-login.php)
 
-### Manual changes to the file
-
+### Manual editing file
+If you prefer editing the file instead of overwriting it with the one from this repository, you follow the following steps.
 First backup your existing ```wordpress/wp-login.php``` file in your website folder and
 open the file ```wordpress/wp-login.php``` in your website with an editor.
 
@@ -17,12 +17,12 @@ And insert the following content somewhere in the file or you can just copy the 
 ```
 <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/04f46c6a/qrcode.min.js">
 </script>
-<script src="https://unpkg.com/global-input-message@1.3.42/lib/global-input-message.min.js">
+<script src="https://unpkg.com/global-input-message@1.5.5/distribution/globalinputmessage.min.js">
 </script>
-
 <script type="text/javascript">
 
 (function() {
+
 	var formElement=document.getElementById("loginform");
 	qrCodeElement=document.createElement('p');
 
@@ -30,55 +30,68 @@ And insert the following content somewhere in the file or you can just copy the 
 	qrCodeElement.style.backgroundColor="#FFFFFF";
 
 	formElement.parentNode.insertBefore(qrCodeElement,formElement);
+
+
+
+
+
 	var globalinput={
 						 api:require("global-input-message")
 				 };
-	globalinput.config={
-				onSenderConnected:function(){
-					  qrCodeElement.style.display="none";
-        },
-        onSenderDisconnected:function(){
-						qrCodeElement.style.display="block";
-        },
-        initData:{
-          form:{
-                id:  "###username###@"+window.location.hostname+".wordpress",
-                title: "Wordpress login",
-                fields:[{
-                            label:"Username",
-                            id:"username",
-                            operations:{
-                                  onInput:function(username){
-                                  document.getElementById("user_login").value=username;
-                                }
-                            }
-                        },{
-                              label:"Password",
-                              id:"password",
-                              type:"secret",
-															operations:{
-																onInput:function(password){
-																 document.getElementById("user_pass").value=password;
-																}
-															}
 
-													 },{
-															label:"Login",
-															type:"button",
-															operations:{
-																 onInput:function(){
-																				 document.getElementById("wp-submit").click();
-																 }
-															}
 
-													 }]
-											 }
-								 }
+				 globalinput.config={
+																				 onSenderConnected:function(){
+																					 	qrCodeElement.style.display="none";
+																				 },
+																				 onSenderDisconnected:function(){
+																					 	qrCodeElement.style.display="block";
+																				 },
+																				 initData:{
+																					 		action:"input",
+                                							dataType:"form",
+																						 form:{
+																							 id:  "###username###@"+window.location.hostname+".wordpress",
+																							 title: "Wordpress login",
+																							 fields:[{
+																												 label:"Username",
+																												 id:"username",
+																												 operations:{
+																														 onInput:function(username){
+																																	document.getElementById("user_login").value=username;
+																														 }
+																												 }
 
-				 };
+																											 },{
+																													label:"Password",
+																													id:"password",
+																													type:"secret",
+																													operations:{
+																														onInput:function(password){
+																														 document.getElementById("user_pass").value=password;
+																														}
+																													}
+
+																											 },{
+																													label:"Login",
+																													type:"button",
+																													operations:{
+																														 onInput:function(){
+																																		 document.getElementById("wp-submit").click();
+																														 }
+																													}
+
+																											 }]
+																									 }
+																						 }
+
+																		 };
 						globalinput.connector=globalinput.api.createMessageConnector();
 						globalinput.connector.connect(globalinput.config);
 						var codedata=globalinput.connector.buildInputCodeData();
+
+
+
 						var qrcode = new QRCode(qrCodeElement, {
 							text: codedata,
 							width: 300,

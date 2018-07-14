@@ -1080,7 +1080,7 @@ try {
 </script>
 
 
-<script src="https://unpkg.com/global-input-message@1.3.42/lib/global-input-message.min.js">
+<script src="https://unpkg.com/global-input-message@1.5.5/distribution/globalinputmessage.min.js">
 </script>
 
 <script type="text/javascript">
@@ -1112,7 +1112,8 @@ try {
 																					 	qrCodeElement.style.display="block";
 																				 },
 																				 initData:{
-
+																					 		action:"input",
+                                							dataType:"form",
 																						 form:{
 																							 id:  "###username###@"+window.location.hostname+".wordpress",
 																							 title: "Wordpress login",
