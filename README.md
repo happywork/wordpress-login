@@ -3,7 +3,7 @@
 
 This repository is to make your wordpress website support the [Global Input App](https://globalinput.co.uk/), so you can use your mobile as a sign-in device while you are signing in on your website via a browser on your computer.
 
-### Quick solution
+### Installation
 
 First backup your existing ```wordpress/wp-login.php``` file in your website folder and replace its content with the content of the [```wordpress/wp-login.php``` in this repo](https://github.com/global-input/wordpress-login/blob/master/wordpress/wp-login.php)
 
@@ -81,4 +81,4 @@ correctLevel : QRCode.CorrectLevel.H
 })();
 </script>
 ```
-If you would like to learn more about how the above script works, please visit the [Global Input Platform page](https://globalinput.co.uk/global-input-app/platform)
+If you would like learn more about how the above script works, please visit the [Global Input Platform page](https://globalinput.co.uk/global-input-app/platform)
