@@ -82,3 +82,5 @@ correctLevel : QRCode.CorrectLevel.H
 </script>
 ```
 If you would like learn more about how the above script works, please visit the [Global Input Platform page](https://globalinput.co.uk/global-input-app/platform)
+
+wordpress plugin...
