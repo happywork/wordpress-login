@@ -7,12 +7,12 @@ This repository is to make your wordpress website support the [Global Input App]
 
 First backup your existing ```wordpress/wp-login.php``` file in your website folder and replace its content with the content of the [```wordpress/wp-login.php``` in this repo](https://github.com/global-input/wordpress-login/blob/master/wordpress/wp-login.php)
 
-### How it Works/Manual Editing file
-If you prefer editing the file instead of overwriting it with the one from this repository, you follow the following steps.
+### How It Works/Manual Editing file
+If you prefer editing the file instead of overwriting it with the one from this repository, you can follow the following steps.
 First backup your existing ```wordpress/wp-login.php``` file in your website folder and
-open the file ```wordpress/wp-login.php``` in your website with an editor.
+open the file ```wordpress/wp-login.php``` with an editor.
 
-And insert the following content somewhere in the file that is how file in this repository is created:
+And insert the following content somewhere in the file:
 
 ```
 <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/04f46c6a/qrcode.min.js">
@@ -81,5 +81,4 @@ correctLevel : QRCode.CorrectLevel.H
 })();
 </script>
 ```
-If you would like know more about the above script, please visit the [Global Input Platform page](https://globalinput.co.uk/global-input-app/platform)
-s
+If you would like learn more about how the above script works, please visit the [Global Input Platform page](https://globalinput.co.uk/global-input-app/platform)
